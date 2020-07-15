@@ -1,11 +1,13 @@
 <script>
-	import Counter from './Counter.svelte'
+	import Counter from './Counter.svelte';
+	import Input from './Input.svelte';
 	export let name;
 
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
+	<Input />
 	<Counter />
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
