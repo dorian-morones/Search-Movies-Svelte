@@ -43,6 +43,9 @@ var app = (function () {
     function space() {
         return text(' ');
     }
+    function empty() {
+        return text('');
+    }
     function listen(node, event, handler, options) {
         node.addEventListener(event, handler, options);
         return () => node.removeEventListener(event, handler, options);
@@ -478,37 +481,171 @@ var app = (function () {
 
     const file$1 = "src/Input.svelte";
 
+    // (29:2) {:else}
+    function create_else_block(ctx) {
+    	let strong;
+
+    	const block = {
+    		c: function create() {
+    			strong = element("strong");
+    			strong.textContent = "No hay resultados";
+    			add_location(strong, file$1, 29, 4, 633);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, strong, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(strong);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(29:2) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (27:2) {#if response.length > 0}
+    function create_if_block_1(ctx) {
+    	let strong;
+    	let t0;
+    	let t1_value = /*response*/ ctx[2].length + "";
+    	let t1;
+    	let t2;
+
+    	const block = {
+    		c: function create() {
+    			strong = element("strong");
+    			t0 = text("Tenemos ");
+    			t1 = text(t1_value);
+    			t2 = text(" películas");
+    			add_location(strong, file$1, 27, 4, 566);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, strong, anchor);
+    			append_dev(strong, t0);
+    			append_dev(strong, t1);
+    			append_dev(strong, t2);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*response*/ 4 && t1_value !== (t1_value = /*response*/ ctx[2].length + "")) set_data_dev(t1, t1_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(strong);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(27:2) {#if response.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (24:0) {#if loading}
+    function create_if_block(ctx) {
+    	let strong;
+
+    	const block = {
+    		c: function create() {
+    			strong = element("strong");
+    			strong.textContent = "Loading...";
+    			add_location(strong, file$1, 24, 2, 498);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, strong, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(strong);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(24:0) {#if loading}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     function create_fragment$1(ctx) {
     	let input;
+    	let t;
+    	let if_block_anchor;
     	let mounted;
     	let dispose;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*loading*/ ctx[1]) return create_if_block;
+    		if (/*response*/ ctx[2].length > 0) return create_if_block_1;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
 
     	const block = {
     		c: function create() {
     			input = element("input");
-    			input.value = /*inputValue*/ ctx[0];
-    			add_location(input, file$1, 14, 0, 346);
+    			t = space();
+    			if_block.c();
+    			if_block_anchor = empty();
+    			attr_dev(input, "placeholder", "Search movies...");
+    			input.value = /*value*/ ctx[0];
+    			add_location(input, file$1, 17, 0, 397);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
+    			insert_dev(target, t, anchor);
+    			if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
 
     			if (!mounted) {
-    				dispose = listen_dev(input, "input", /*handleInput*/ ctx[1], false, false, false);
+    				dispose = listen_dev(input, "input", /*handleInput*/ ctx[3], false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*inputValue*/ 1 && input.value !== /*inputValue*/ ctx[0]) {
-    				prop_dev(input, "value", /*inputValue*/ ctx[0]);
+    			if (dirty & /*value*/ 1 && input.value !== /*value*/ ctx[0]) {
+    				prop_dev(input, "value", /*value*/ ctx[0]);
+    			}
+
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
     			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(input);
+    			if (detaching) detach_dev(t);
+    			if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
     			mounted = false;
     			dispose();
     		}
@@ -526,9 +663,10 @@ var app = (function () {
     }
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let inputValue = "";
+    	let value = "";
+    	let loading = false;
     	let response = [];
-    	const handleInput = event => $$invalidate(0, inputValue = event.target.value);
+    	const handleInput = event => $$invalidate(0, value = event.target.value);
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -537,11 +675,12 @@ var app = (function () {
 
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("Input", $$slots, []);
-    	$$self.$capture_state = () => ({ inputValue, response, handleInput });
+    	$$self.$capture_state = () => ({ value, loading, response, handleInput });
 
     	$$self.$inject_state = $$props => {
-    		if ("inputValue" in $$props) $$invalidate(0, inputValue = $$props.inputValue);
-    		if ("response" in $$props) response = $$props.response;
+    		if ("value" in $$props) $$invalidate(0, value = $$props.value);
+    		if ("loading" in $$props) $$invalidate(1, loading = $$props.loading);
+    		if ("response" in $$props) $$invalidate(2, response = $$props.response);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -549,16 +688,19 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*inputValue*/ 1) {
-    			 if (inputValue.length > 2) {
-    				fetch(`https://www.omdbapi.com/?s=${inputValue}&apikey=422350ff`).then(res => res.json()).then(apiResponse => {
-    					response = apiResponse.Search;
+    		if ($$self.$$.dirty & /*value*/ 1) {
+    			 if (value.length > 2) {
+    				$$invalidate(1, loading = true);
+
+    				fetch(`https://www.omdbapi.com/?s=${value}&apikey=422350ff`).then(res => res.json()).then(apiResponse => {
+    					$$invalidate(2, response = apiResponse.Search || []);
+    					$$invalidate(1, loading = false);
     				});
     			}
     		}
     	};
 
-    	return [inputValue, handleInput];
+    	return [value, loading, response, handleInput];
     }
 
     class Input extends SvelteComponentDev {
