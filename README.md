@@ -1,4 +1,3 @@
-# Search movies
+# Movie searcher
 
-![Svelte Project](https://midu.dev/images/svelte-logo.png)
-
+ Web App to search movies, built with Svelte
