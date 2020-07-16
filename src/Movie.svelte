@@ -1,5 +1,5 @@
 <script>
-  export let title, poster, year;
+  export let title, poster, year
 </script>
 
 <style>
@@ -9,6 +9,7 @@ article {
   margin-bottom: 8px;
   padding: 16px;
 }
+
 h3 {
   font-size: 24px;
   margin-bottom: 4px;

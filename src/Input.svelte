@@ -1,10 +1,13 @@
 <script>
   import Movie from './Movie.svelte'
+
   let value = ''
   let loading = false
   let response = []
+
   const handleInput = (event) =>
     value = event.target.value
+
   $: if (value.length > 2) {
     loading = true
     fetch(`https://www.omdbapi.com/?s=${value}&apikey=422350ff`)
