@@ -549,7 +549,7 @@ var app = (function () {
 
     const file$1 = "src/Movie.svelte";
 
-    // (23:2) {#if 2020 - year < 5}
+    // (33:4) {#if 2020 - year < 5}
     function create_if_block(ctx) {
     	let i;
 
@@ -557,7 +557,7 @@ var app = (function () {
     		c: function create() {
     			i = element("i");
     			i.textContent = "🆕";
-    			add_location(i, file$1, 23, 4, 333);
+    			add_location(i, file$1, 33, 6, 461);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -571,7 +571,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(23:2) {#if 2020 - year < 5}",
+    		source: "(33:4) {#if 2020 - year < 5}",
     		ctx
     	});
 
@@ -583,6 +583,7 @@ var app = (function () {
     	let img;
     	let img_src_value;
     	let t0;
+    	let div;
     	let h3;
     	let t1;
     	let t2;
@@ -596,6 +597,7 @@ var app = (function () {
     			article = element("article");
     			img = element("img");
     			t0 = space();
+    			div = element("div");
     			h3 = element("h3");
     			t1 = text(/*title*/ ctx[0]);
     			t2 = space();
@@ -605,12 +607,15 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr_dev(img, "alt", /*title*/ ctx[0]);
     			if (img.src !== (img_src_value = /*poster*/ ctx[1])) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$1, 19, 2, 231);
-    			attr_dev(h3, "class", "svelte-1uteb54");
-    			add_location(h3, file$1, 20, 2, 266);
-    			add_location(span, file$1, 21, 2, 285);
-    			attr_dev(article, "class", "svelte-1uteb54");
-    			add_location(article, file$1, 18, 0, 219);
+    			attr_dev(img, "class", "svelte-1ocly0v");
+    			add_location(img, file$1, 28, 2, 343);
+    			attr_dev(h3, "class", "svelte-1ocly0v");
+    			add_location(h3, file$1, 30, 4, 388);
+    			add_location(span, file$1, 31, 4, 409);
+    			attr_dev(div, "class", "svelte-1ocly0v");
+    			add_location(div, file$1, 29, 2, 378);
+    			attr_dev(article, "class", "svelte-1ocly0v");
+    			add_location(article, file$1, 27, 0, 331);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -619,13 +624,14 @@ var app = (function () {
     			insert_dev(target, article, anchor);
     			append_dev(article, img);
     			append_dev(article, t0);
-    			append_dev(article, h3);
+    			append_dev(article, div);
+    			append_dev(div, h3);
     			append_dev(h3, t1);
-    			append_dev(article, t2);
-    			append_dev(article, span);
+    			append_dev(div, t2);
+    			append_dev(div, span);
     			append_dev(span, t3);
-    			append_dev(article, t4);
-    			if (if_block) if_block.m(article, null);
+    			append_dev(div, t4);
+    			if (if_block) if_block.m(div, null);
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*title*/ 1) {
@@ -643,7 +649,7 @@ var app = (function () {
     				if (if_block) ; else {
     					if_block = create_if_block(ctx);
     					if_block.c();
-    					if_block.m(article, null);
+    					if_block.m(div, null);
     				}
     			} else if (if_block) {
     				if_block.d(1);
@@ -766,9 +772,9 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (30:0) {:else}
+    // (56:0) {:else}
     function create_else_block(ctx) {
-    	let each_1_anchor;
+    	let div;
     	let current;
     	let each_value = /*response*/ ctx[2];
     	validate_each_argument(each_value);
@@ -790,25 +796,28 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
+    			div = element("div");
+
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			each_1_anchor = empty();
-
     			if (each_1_else) {
     				each_1_else.c();
     			}
+
+    			attr_dev(div, "class", "moviesContainer svelte-17ftlbr");
+    			add_location(div, file$2, 56, 2, 1069);
     		},
     		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
+    				each_blocks[i].m(div, null);
     			}
 
-    			insert_dev(target, each_1_anchor, anchor);
-
     			if (each_1_else) {
-    				each_1_else.m(target, anchor);
+    				each_1_else.m(div, null);
     			}
 
     			current = true;
@@ -829,7 +838,7 @@ var app = (function () {
     						each_blocks[i] = create_each_block(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    						each_blocks[i].m(div, null);
     					}
     				}
 
@@ -849,7 +858,7 @@ var app = (function () {
     				} else if (!each_1_else) {
     					each_1_else = create_else_block_1(ctx);
     					each_1_else.c();
-    					each_1_else.m(each_1_anchor.parentNode, each_1_anchor);
+    					each_1_else.m(div, null);
     				}
     			}
     		},
@@ -872,9 +881,9 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(each_1_anchor);
-    			if (each_1_else) each_1_else.d(detaching);
+    			if (each_1_else) each_1_else.d();
     		}
     	};
 
@@ -882,14 +891,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(30:0) {:else}",
+    		source: "(56:0) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (28:0) {#if loading}
+    // (54:0) {#if loading}
     function create_if_block$1(ctx) {
     	let strong;
 
@@ -897,7 +906,7 @@ var app = (function () {
     		c: function create() {
     			strong = element("strong");
     			strong.textContent = "Loading...";
-    			add_location(strong, file$2, 28, 2, 538);
+    			add_location(strong, file$2, 54, 2, 1031);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, strong, anchor);
@@ -914,14 +923,14 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(28:0) {#if loading}",
+    		source: "(54:0) {#if loading}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (38:2) {:else}
+    // (65:4) {:else}
     function create_else_block_1(ctx) {
     	let strong;
 
@@ -929,7 +938,7 @@ var app = (function () {
     		c: function create() {
     			strong = element("strong");
     			strong.textContent = "No hay resultados";
-    			add_location(strong, file$2, 38, 4, 737);
+    			add_location(strong, file$2, 65, 6, 1280);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, strong, anchor);
@@ -943,14 +952,14 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(38:2) {:else}",
+    		source: "(65:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (31:2) {#each response as {Title, Poster, Year}
+    // (58:4) {#each response as {Title, Poster, Year}
     function create_each_block(ctx) {
     	let movie;
     	let current;
@@ -998,7 +1007,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(31:2) {#each response as {Title, Poster, Year}",
+    		source: "(58:4) {#each response as {Title, Poster, Year}",
     		ctx
     	});
 
@@ -1006,6 +1015,7 @@ var app = (function () {
     }
 
     function create_fragment$2(ctx) {
+    	let div;
     	let input;
     	let t;
     	let current_block_type_index;
@@ -1027,19 +1037,24 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
+    			div = element("div");
     			input = element("input");
     			t = space();
     			if_block.c();
     			if_block_anchor = empty();
     			attr_dev(input, "placeholder", "Search movies...");
     			input.value = /*value*/ ctx[0];
-    			add_location(input, file$2, 21, 0, 437);
+    			attr_dev(input, "class", "svelte-17ftlbr");
+    			add_location(input, file$2, 46, 2, 915);
+    			attr_dev(div, "class", "inputContainer svelte-17ftlbr");
+    			add_location(div, file$2, 45, 0, 884);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, input, anchor);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, input);
     			insert_dev(target, t, anchor);
     			if_blocks[current_block_type_index].m(target, anchor);
     			insert_dev(target, if_block_anchor, anchor);
@@ -1089,7 +1104,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(input);
+    			if (detaching) detach_dev(div);
     			if (detaching) detach_dev(t);
     			if_blocks[current_block_type_index].d(detaching);
     			if (detaching) detach_dev(if_block_anchor);
