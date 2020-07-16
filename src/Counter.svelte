@@ -1,18 +1,24 @@
 <script>
-	export let counter = 0;
-
+	export let initialCounter = 0;
+	export let maxCounter = 9;
+	let contador = initialCounter
 	function handleClick () {
-		counter ++;
-  }
-  
-  $: numValidation = counter % 2 === 0 ? 'is even' : 'is odd';
+		contador++
+	}
+	// let isEvenOrOdd = contador % 2 === 0 ? 'Is Even' : 'Is Odd'
+	$: isEvenOrOdd = contador % 2 === 0 ? 'Is Even' : 'Is Odd'
+	$: if (contador > maxCounter ) {
+		console.log('limit contador')
+		contador = maxCounter
+	}
 </script>
 
-<div>
-	<button on:click={handleClick}>Incrementar</button>
-	<p>{counter} = {numValidation}</p>
-</div>
-
 <style>
-
+	span {
+		color: red;
+	}
 </style>
+
+<button on:click={handleClick}>Incrementar</button>
+<span>{contador}</span>
+<span>{isEvenOrOdd}</span>
