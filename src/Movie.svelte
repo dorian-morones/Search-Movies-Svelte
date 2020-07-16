@@ -23,6 +23,14 @@ h3 {
   font-size: 24px;
   margin-bottom: 4px;
 }
+.newTag{
+  background: #ff3e00;
+  color: #fff;
+  width: 40px;
+  text-align: center;
+  padding: 2px;
+  margin-top: 10px;
+}
 </style>
 
 <article>
@@ -31,7 +39,7 @@ h3 {
     <h3>{title}</h3>
     <span>{year}</span>
     {#if 2020 - year < 5}
-      <i>🆕</i>
+      <span class="newTag">New</span>
     {/if}
   </div>
 </article>

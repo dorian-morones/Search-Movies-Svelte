@@ -549,21 +549,22 @@ var app = (function () {
 
     const file$1 = "src/Movie.svelte";
 
-    // (33:4) {#if 2020 - year < 5}
+    // (41:4) {#if 2020 - year < 5}
     function create_if_block(ctx) {
-    	let i;
+    	let span;
 
     	const block = {
     		c: function create() {
-    			i = element("i");
-    			i.textContent = "🆕";
-    			add_location(i, file$1, 33, 6, 461);
+    			span = element("span");
+    			span.textContent = "New";
+    			attr_dev(span, "class", "newTag svelte-1cmi1bi");
+    			add_location(span, file$1, 41, 6, 583);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, i, anchor);
+    			insert_dev(target, span, anchor);
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(i);
+    			if (detaching) detach_dev(span);
     		}
     	};
 
@@ -571,7 +572,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(33:4) {#if 2020 - year < 5}",
+    		source: "(41:4) {#if 2020 - year < 5}",
     		ctx
     	});
 
@@ -607,15 +608,15 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr_dev(img, "alt", /*title*/ ctx[0]);
     			if (img.src !== (img_src_value = /*poster*/ ctx[1])) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "class", "svelte-1ocly0v");
-    			add_location(img, file$1, 28, 2, 343);
-    			attr_dev(h3, "class", "svelte-1ocly0v");
-    			add_location(h3, file$1, 30, 4, 388);
-    			add_location(span, file$1, 31, 4, 409);
-    			attr_dev(div, "class", "svelte-1ocly0v");
-    			add_location(div, file$1, 29, 2, 378);
-    			attr_dev(article, "class", "svelte-1ocly0v");
-    			add_location(article, file$1, 27, 0, 331);
+    			attr_dev(img, "class", "svelte-1cmi1bi");
+    			add_location(img, file$1, 36, 2, 465);
+    			attr_dev(h3, "class", "svelte-1cmi1bi");
+    			add_location(h3, file$1, 38, 4, 510);
+    			add_location(span, file$1, 39, 4, 531);
+    			attr_dev(div, "class", "svelte-1cmi1bi");
+    			add_location(div, file$1, 37, 2, 500);
+    			attr_dev(article, "class", "svelte-1cmi1bi");
+    			add_location(article, file$1, 35, 0, 453);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
